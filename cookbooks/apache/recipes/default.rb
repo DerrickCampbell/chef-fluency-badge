@@ -6,6 +6,12 @@
 #
 #install apache package
 
+if node['platform_family'] == "rhel"
+	package = "httpd"
+elsif node['platform_family'] == "debian"
+	package = "apache2"
+end
+
 package 'apache2' do
 	package_name 'httpd'
 	action :install
@@ -15,4 +21,6 @@ service 'apache2' do
 	service_name 'httpd'
 	action [:start, :enable]
 end
+
+
 
